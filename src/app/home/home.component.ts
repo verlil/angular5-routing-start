@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
   onLoadServers(){
     console.log('testing routing from .ts');
     this.router.navigate(['/servers']);
-    this.router.
   }
 
 }
