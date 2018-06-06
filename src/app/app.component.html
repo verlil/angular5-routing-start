@@ -3,7 +3,10 @@
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <ul class="nav nav-tabs">
         <li role="presentation" class="active" routerLink="/"><a>Home</a></li>
+        <!-- absolute path, it is going to localhost:4200/servers -->
         <li role="presentation"><a routerLink="/servers">Servers</a></li>
+        <!-- relative path, 'servers' appends to current path -->
+        <li role="presentation"><a routerLink="servers">Servers</a></li>
         <li role="presentation"><a [routerLink]="['/users']">Users</a></li>
       </ul>
     </div>
