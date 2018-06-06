@@ -25,7 +25,7 @@ export class EditServerComponent implements OnInit {
       }
     );
     this.route.fragment.subscribe(
-      (fragment: Params) => {
+      (fragment: string) => {
         console.log(fragment);
       }
     );
