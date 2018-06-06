@@ -13,9 +13,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  onLoadServers(){
-    console.log('testing routing from .ts');
-    this.router.navigate(['/servers']);
+  onLoadServer(){
+    // console.log('testing routing from .ts');
+    this.router.navigate(['/servers', id, 'edit'], {queryParams: {allowEdit: '1'}, fragment: 'loading'});
   }
 
 }
