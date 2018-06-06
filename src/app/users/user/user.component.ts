@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Params } from "@angular/router";
 
 @Component({
   selector: 'app-user',
@@ -17,6 +17,16 @@ export class UserComponent implements OnInit {
       name: this.route.snapshot.params['name']
     }
     console.log(this.route.snapshot.params);
+    //this.route.params - this is an observable
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.user.id = params['id'];
+          this.user.name = params['name'];
+        }
+      );// this is necessary if your params in path will change, because
+      //Angular doesnt re-render the loaded component within that component by default
+      //this subscription will be cleaned automatically when this component destroy
   }
 
 }
