@@ -1,3 +1,4 @@
+import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
@@ -10,10 +11,21 @@ import { ServersService } from '../servers.service';
 export class ServerComponent implements OnInit {
   server: {id: number, name: string, status: string};
 
-  constructor(private serversService: ServersService) { }
+  constructor(private serversService: ServersService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.server = this.serversService.getServer(1);
+    const serverId = +this.route.snapshot.params['id'];
+    //this 'plus' is neccesary, because after parsing the route we got a string '1'
+    //but in our app the 'id' value is a number
+
+    this.server = this.serversService.getServer(serverId);
+
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.server = this.serversService.getServer(+params['id']);
+      }
+    )
   }
 
 }
