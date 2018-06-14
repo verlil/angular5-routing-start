@@ -1,4 +1,4 @@
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Params, Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 
 import {ServersService} from '../servers.service';
@@ -17,17 +17,24 @@ export class ServerComponent implements OnInit {
   }
 
   ngOnInit() {
-    const serverId = +this.route.snapshot.params['id'];
-    // this 'plus' is necessary, because after parsing the route we got a string '1'
-    // but in our app the 'id' value is a number
-
-    this.server = this.serversService.getServer(serverId);
-
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.server = this.serversService.getServer(+params['id']);
-      }
-    );
+    this.route.data
+      .subscribe(
+        (data: Data) => {
+          this.server = data['server'];
+          // the name of value 'server' in 'data['server']' defines in app-routing.module.ts
+        }
+      );
+    // const serverId = +this.route.snapshot.params['id'];
+    // // this 'plus' is necessary, because after parsing the route we got a string '1'
+    // // but in our app the 'id' value is a number
+    //
+    // this.server = this.serversService.getServer(serverId);
+    //
+    // this.route.params.subscribe(
+    //   (params: Params) => {
+    //     this.server = this.serversService.getServer(+params['id']);
+    //   }
+    // );
   }
 
   onEdit() {
