@@ -9,16 +9,17 @@ import {ServersService} from '../servers.service';
   styleUrls: ['./server.component.css']
 })
 export class ServerComponent implements OnInit {
-  server: {id: number, name: string, status: string};
+  server: { id: number, name: string, status: string };
 
   constructor(private serversService: ServersService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
     const serverId = +this.route.snapshot.params['id'];
-    //this 'plus' is neccesary, because after parsing the route we got a string '1'
-    //but in our app the 'id' value is a number
+    // this 'plus' is necessary, because after parsing the route we got a string '1'
+    // but in our app the 'id' value is a number
 
     this.server = this.serversService.getServer(serverId);
 
@@ -26,10 +27,10 @@ export class ServerComponent implements OnInit {
       (params: Params) => {
         this.server = this.serversService.getServer(+params['id']);
       }
-    )
+    );
   }
 
-  onEdit(){
+  onEdit() {
     this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
   }
 
